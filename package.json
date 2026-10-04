@@ -1,0 +1,10 @@
+{
+  "name": "temp",
+  "version": "1.0.0",
+  "description": "A tiny command-line todo list",
+  "main": "todo.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "license": "MIT"
+}
