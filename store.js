@@ -25,4 +25,8 @@ function remove(todos, id) {
   return todos.filter((t) => t.id !== id);
 }
 
-module.exports = { load, save, add, complete, remove };
+function clearDone(todos) {
+  return todos.filter((t) => !t.done);
+}
+
+module.exports = { load, save, add, complete, remove, clearDone };

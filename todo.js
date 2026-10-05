@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { load, save, add, complete, remove } = require("./store");
+const { load, save, add, complete, remove, clearDone } = require("./store");
 
 const [command, ...args] = process.argv.slice(2);
 const todos = load();
@@ -20,6 +20,10 @@ switch (command) {
   case "rm":
     save(remove(todos, Number(args[0])));
     console.log("Removed.");
+    break;
+  case "clear":
+    save(clearDone(todos));
+    console.log("Cleared completed todos.");
     break;
   case "list":
   case undefined:
