@@ -10,6 +10,7 @@ node todo.js list
 node todo.js done 1
 node todo.js rm 1
 node todo.js clear
+node todo.js stats
 ```
 
 ## Tests

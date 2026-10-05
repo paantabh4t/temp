@@ -29,4 +29,9 @@ function clearDone(todos) {
   return todos.filter((t) => !t.done);
 }
 
-module.exports = { load, save, add, complete, remove, clearDone };
+function summary(todos) {
+  const done = todos.filter((t) => t.done).length;
+  return { total: todos.length, done, pending: todos.length - done };
+}
+
+module.exports = { load, save, add, complete, remove, clearDone, summary };

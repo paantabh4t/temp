@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { add, complete, remove, clearDone } = require("./store");
+const { add, complete, remove, clearDone, summary } = require("./store");
 
 let todos = add([], "write code");
 todos = add(todos, "push code");
@@ -15,5 +15,7 @@ assert.strictEqual(add(todos, "next")[1].id, 3);
 
 const mixed = complete(add(add([], "a"), "b"), 1);
 assert.deepStrictEqual(clearDone(mixed).map((t) => t.text), ["b"]);
+
+assert.deepStrictEqual(summary(mixed), { total: 2, done: 1, pending: 1 });
 
 console.log("All tests passed.");

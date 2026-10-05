@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { load, save, add, complete, remove, clearDone } = require("./store");
+const { load, save, add, complete, remove, clearDone, summary } = require("./store");
 
 const [command, ...args] = process.argv.slice(2);
 const todos = load();
@@ -25,6 +25,11 @@ switch (command) {
     save(clearDone(todos));
     console.log("Cleared completed todos.");
     break;
+  case "stats": {
+    const { total, done, pending } = summary(todos);
+    console.log(`${total} total, ${done} done, ${pending} pending`);
+    break;
+  }
   case "list":
   case undefined:
     if (!todos.length) console.log("Nothing to do.");
