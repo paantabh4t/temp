@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { load, save, add, complete, remove, clearDone, summary } = require("./store");
+const { load, save, add, complete, remove, clearDone, summary, reopen } = require("./store");
 
 const [command, ...args] = process.argv.slice(2);
 const todos = load();
@@ -16,6 +16,10 @@ switch (command) {
   case "done":
     save(complete(todos, Number(args[0])));
     console.log("Marked done.");
+    break;
+  case "undo":
+    save(reopen(todos, Number(args[0])));
+    console.log("Marked not done.");
     break;
   case "rm":
     save(remove(todos, Number(args[0])));

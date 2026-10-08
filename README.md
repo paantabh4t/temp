@@ -8,6 +8,7 @@ A tiny command-line todo list, written in plain Node.js (no dependencies).
 node todo.js add "buy milk"
 node todo.js list
 node todo.js done 1
+node todo.js undo 1
 node todo.js rm 1
 node todo.js clear
 node todo.js stats
