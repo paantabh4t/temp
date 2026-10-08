@@ -4,6 +4,15 @@ const { load, save, add, complete, remove, clearDone, summary, reopen, rename } 
 const [command, ...args] = process.argv.slice(2);
 const todos = load();
 
+function requireId(value) {
+  const id = Number(value);
+  if (!todos.some((t) => t.id === id)) {
+    console.error(`No todo with id ${value}.`);
+    process.exit(1);
+  }
+  return id;
+}
+
 switch (command) {
   case "add":
     if (!args.length) {
@@ -14,11 +23,11 @@ switch (command) {
     console.log("Added.");
     break;
   case "done":
-    save(complete(todos, Number(args[0])));
+    save(complete(todos, requireId(args[0])));
     console.log("Marked done.");
     break;
   case "undo":
-    save(reopen(todos, Number(args[0])));
+    save(reopen(todos, requireId(args[0])));
     console.log("Marked not done.");
     break;
   case "edit":
@@ -26,11 +35,11 @@ switch (command) {
       console.error("Usage: node todo.js edit <id> <text>");
       process.exit(1);
     }
-    save(rename(todos, Number(args[0]), args.slice(1).join(" ")));
+    save(rename(todos, requireId(args[0]), args.slice(1).join(" ")));
     console.log("Updated.");
     break;
   case "rm":
-    save(remove(todos, Number(args[0])));
+    save(remove(todos, requireId(args[0])));
     console.log("Removed.");
     break;
   case "clear":
