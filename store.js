@@ -25,6 +25,10 @@ function reopen(todos, id) {
   return todos.map((t) => (t.id === id ? { ...t, done: false } : t));
 }
 
+function rename(todos, id, text) {
+  return todos.map((t) => (t.id === id ? { ...t, text } : t));
+}
+
 function remove(todos, id) {
   return todos.filter((t) => t.id !== id);
 }
@@ -38,4 +42,4 @@ function summary(todos) {
   return { total: todos.length, done, pending: todos.length - done };
 }
 
-module.exports = { load, save, add, complete, remove, clearDone, summary, reopen };
+module.exports = { load, save, add, complete, remove, clearDone, summary, reopen, rename };

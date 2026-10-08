@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { load, save, add, complete, remove, clearDone, summary, reopen } = require("./store");
+const { load, save, add, complete, remove, clearDone, summary, reopen, rename } = require("./store");
 
 const [command, ...args] = process.argv.slice(2);
 const todos = load();
@@ -20,6 +20,14 @@ switch (command) {
   case "undo":
     save(reopen(todos, Number(args[0])));
     console.log("Marked not done.");
+    break;
+  case "edit":
+    if (args.length < 2) {
+      console.error("Usage: node todo.js edit <id> <text>");
+      process.exit(1);
+    }
+    save(rename(todos, Number(args[0]), args.slice(1).join(" ")));
+    console.log("Updated.");
     break;
   case "rm":
     save(remove(todos, Number(args[0])));
