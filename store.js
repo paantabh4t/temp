@@ -29,6 +29,11 @@ function rename(todos, id, text) {
   return todos.map((t) => (t.id === id ? { ...t, text } : t));
 }
 
+function search(todos, term) {
+  const needle = term.toLowerCase();
+  return todos.filter((t) => t.text.toLowerCase().includes(needle));
+}
+
 function remove(todos, id) {
   return todos.filter((t) => t.id !== id);
 }
@@ -42,4 +47,4 @@ function summary(todos) {
   return { total: todos.length, done, pending: todos.length - done };
 }
 
-module.exports = { load, save, add, complete, remove, clearDone, summary, reopen, rename };
+module.exports = { load, save, add, complete, remove, clearDone, summary, reopen, rename, search };

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { load, save, add, complete, remove, clearDone, summary, reopen, rename } = require("./store");
+const { load, save, add, complete, remove, clearDone, summary, reopen, rename, search } = require("./store");
 
 const [command, ...args] = process.argv.slice(2);
 const todos = load();
@@ -46,6 +46,12 @@ switch (command) {
     save(clearDone(todos));
     console.log("Cleared completed todos.");
     break;
+  case "find": {
+    const matches = search(todos, args.join(" "));
+    if (!matches.length) console.log("No matches.");
+    for (const t of matches) console.log(`${t.id}. [${t.done ? "x" : " "}] ${t.text}`);
+    break;
+  }
   case "stats": {
     const { total, done, pending } = summary(todos);
     console.log(`${total} total, ${done} done, ${pending} pending`);
