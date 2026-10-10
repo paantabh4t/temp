@@ -62,6 +62,9 @@ switch (command) {
     if (!todos.length) console.log("Nothing to do.");
     for (const t of todos) console.log(`${t.id}. [${t.done ? "x" : " "}] ${t.text}`);
     break;
+  case "help":
+    console.log("Commands: add <text>, list, find <term>, done <id>, undo <id>, edit <id> <text>, rm <id>, clear, stats, help");
+    break;
   default:
     console.error(`Unknown command: ${command}`);
     process.exit(1);

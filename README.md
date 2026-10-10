@@ -14,6 +14,7 @@ node todo.js edit 1 "buy oat milk"
 node todo.js rm 1
 node todo.js clear
 node todo.js stats
+node todo.js help
 ```
 
 ## Tests
