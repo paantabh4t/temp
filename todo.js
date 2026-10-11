@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { load, save, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll } = require("./store");
+const { load, save, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll, sortPendingFirst } = require("./store");
 
 const [command, ...args] = process.argv.slice(2);
 let todos;
@@ -86,7 +86,7 @@ switch (command) {
   case "list":
   case undefined:
     if (!todos.length) console.log("Nothing to do.");
-    for (const t of todos) console.log(format(t));
+    for (const t of sortPendingFirst(todos)) console.log(format(t));
     break;
   case "help":
     console.log("Commands: add <text>, list, pending, find <term>, done <id|all>, undo <id>, edit <id> <text>, rm <id>, clear, stats, help");

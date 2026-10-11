@@ -2,7 +2,7 @@ const assert = require("assert");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const { load, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll } = require("./store");
+const { load, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll, sortPendingFirst } = require("./store");
 
 let todos = add([], "write code");
 todos = add(todos, "push code");
@@ -33,6 +33,9 @@ assert.ok(completeAll(mixed).every((t) => t.done));
 
 assert.throws(() => add([], "   "), /cannot be empty/);
 assert.strictEqual(add([], "  tidy  ")[0].text, "tidy");
+
+assert.deepStrictEqual(sortPendingFirst(mixed).map((t) => t.id), [2, 1]);
+assert.deepStrictEqual(mixed.map((t) => t.id), [1, 2]);
 
 const bad = path.join(os.tmpdir(), "temp-todo-bad.json");
 fs.writeFileSync(bad, "{not json");
