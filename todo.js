@@ -2,7 +2,13 @@
 const { load, save, add, complete, remove, clearDone, summary, reopen, rename, search, pending } = require("./store");
 
 const [command, ...args] = process.argv.slice(2);
-const todos = load();
+let todos;
+try {
+  todos = load();
+} catch (err) {
+  console.error(err.message);
+  process.exit(1);
+}
 
 function format(t) {
   return `${t.id}. [${t.done ? "x" : " "}] ${t.text}`;

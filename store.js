@@ -5,7 +5,11 @@ const FILE = path.join(__dirname, "todos.json");
 
 function load(file = FILE) {
   if (!fs.existsSync(file)) return [];
-  return JSON.parse(fs.readFileSync(file, "utf8"));
+  try {
+    return JSON.parse(fs.readFileSync(file, "utf8"));
+  } catch (err) {
+    throw new Error(`Could not read ${file}: ${err.message}`);
+  }
 }
 
 function save(todos, file = FILE) {
