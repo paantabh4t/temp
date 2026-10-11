@@ -31,6 +31,9 @@ assert.deepStrictEqual(pending(mixed).map((t) => t.id), [2]);
 
 assert.ok(completeAll(mixed).every((t) => t.done));
 
+assert.throws(() => add([], "   "), /cannot be empty/);
+assert.strictEqual(add([], "  tidy  ")[0].text, "tidy");
+
 const bad = path.join(os.tmpdir(), "temp-todo-bad.json");
 fs.writeFileSync(bad, "{not json");
 assert.throws(() => load(bad), /Could not read/);

@@ -29,7 +29,12 @@ switch (command) {
       console.error("Usage: node todo.js add <text>");
       process.exit(1);
     }
-    save(add(todos, args.join(" ")));
+    try {
+      save(add(todos, args.join(" ")));
+    } catch (err) {
+      console.error(err.message);
+      process.exit(1);
+    }
     console.log("Added.");
     break;
   case "done":

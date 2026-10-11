@@ -17,8 +17,9 @@ function save(todos, file = FILE) {
 }
 
 function add(todos, text) {
+  if (!text.trim()) throw new Error("Todo text cannot be empty.");
   const id = todos.reduce((max, t) => Math.max(max, t.id), 0) + 1;
-  return [...todos, { id, text, done: false }];
+  return [...todos, { id, text: text.trim(), done: false }];
 }
 
 function complete(todos, id) {
