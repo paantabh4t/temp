@@ -4,6 +4,10 @@ const { load, save, add, complete, remove, clearDone, summary, reopen, rename, s
 const [command, ...args] = process.argv.slice(2);
 const todos = load();
 
+function format(t) {
+  return `${t.id}. [${t.done ? "x" : " "}] ${t.text}`;
+}
+
 function requireId(value) {
   const id = Number(value);
   if (!todos.some((t) => t.id === id)) {
@@ -49,7 +53,7 @@ switch (command) {
   case "find": {
     const matches = search(todos, args.join(" "));
     if (!matches.length) console.log("No matches.");
-    for (const t of matches) console.log(`${t.id}. [${t.done ? "x" : " "}] ${t.text}`);
+    for (const t of matches) console.log(format(t));
     break;
   }
   case "stats": {
@@ -60,7 +64,7 @@ switch (command) {
   case "list":
   case undefined:
     if (!todos.length) console.log("Nothing to do.");
-    for (const t of todos) console.log(`${t.id}. [${t.done ? "x" : " "}] ${t.text}`);
+    for (const t of todos) console.log(format(t));
     break;
   case "help":
     console.log("Commands: add <text>, list, find <term>, done <id>, undo <id>, edit <id> <text>, rm <id>, clear, stats, help");
