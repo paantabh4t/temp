@@ -78,6 +78,9 @@ switch (command) {
     for (const t of matches) console.log(format(t));
     break;
   }
+  case "count":
+    console.log(String(pending(todos).length));
+    break;
   case "stats": {
     const { total, done, pending } = summary(todos);
     console.log(`${total} total, ${done} done, ${pending} pending`);
@@ -89,7 +92,7 @@ switch (command) {
     for (const t of sortPendingFirst(todos)) console.log(format(t));
     break;
   case "help":
-    console.log("Commands: add <text>, list, pending, find <term>, done <id|all>, undo <id>, edit <id> <text>, rm <id>, clear, stats, help");
+    console.log("Commands: add <text>, list, pending, find <term>, done <id|all>, undo <id>, edit <id> <text>, rm <id>, clear, count, stats, help");
     break;
   default:
     console.error(`Unknown command: ${command}`);
