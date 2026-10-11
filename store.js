@@ -42,6 +42,10 @@ function pending(todos) {
   return todos.filter((t) => !t.done);
 }
 
+function completeAll(todos) {
+  return todos.map((t) => ({ ...t, done: true }));
+}
+
 function remove(todos, id) {
   return todos.filter((t) => t.id !== id);
 }
@@ -55,4 +59,4 @@ function summary(todos) {
   return { total: todos.length, done, pending: todos.length - done };
 }
 
-module.exports = { load, save, add, complete, remove, clearDone, summary, reopen, rename, search, pending };
+module.exports = { load, save, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll };
