@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { load, save, add, complete, remove, clearDone, summary, reopen, rename, search } = require("./store");
+const { load, save, add, complete, remove, clearDone, summary, reopen, rename, search, pending } = require("./store");
 
 const [command, ...args] = process.argv.slice(2);
 const todos = load();
@@ -50,6 +50,12 @@ switch (command) {
     save(clearDone(todos));
     console.log("Cleared completed todos.");
     break;
+  case "pending": {
+    const open = pending(todos);
+    if (!open.length) console.log("Nothing pending.");
+    for (const t of open) console.log(format(t));
+    break;
+  }
   case "find": {
     const matches = search(todos, args.join(" "));
     if (!matches.length) console.log("No matches.");
@@ -67,7 +73,7 @@ switch (command) {
     for (const t of todos) console.log(format(t));
     break;
   case "help":
-    console.log("Commands: add <text>, list, find <term>, done <id>, undo <id>, edit <id> <text>, rm <id>, clear, stats, help");
+    console.log("Commands: add <text>, list, pending, find <term>, done <id>, undo <id>, edit <id> <text>, rm <id>, clear, stats, help");
     break;
   default:
     console.error(`Unknown command: ${command}`);
