@@ -37,6 +37,8 @@ assert.strictEqual(add([], "  tidy  ")[0].text, "tidy");
 assert.deepStrictEqual(sortPendingFirst(mixed).map((t) => t.id), [2, 1]);
 assert.deepStrictEqual(mixed.map((t) => t.id), [1, 2]);
 
+assert.ok(!Number.isNaN(Date.parse(add([], "dated")[0].createdAt)));
+
 const bad = path.join(os.tmpdir(), "temp-todo-bad.json");
 fs.writeFileSync(bad, "{not json");
 assert.throws(() => load(bad), /Could not read/);
