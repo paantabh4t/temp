@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { load, save, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll, sortPendingFirst } = require("./store");
+const { load, save, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll, sortPendingFirst, toMarkdown } = require("./store");
 
 const [command, ...args] = process.argv.slice(2);
 let todos;
@@ -78,6 +78,9 @@ switch (command) {
     for (const t of matches) console.log(format(t));
     break;
   }
+  case "export":
+    if (todos.length) console.log(toMarkdown(sortPendingFirst(todos)));
+    break;
   case "count":
     console.log(String(pending(todos).length));
     break;
@@ -92,7 +95,7 @@ switch (command) {
     for (const t of sortPendingFirst(todos)) console.log(format(t));
     break;
   case "help":
-    console.log("Commands: add <text>, list, pending, find <term>, done <id|all>, undo <id>, edit <id> <text>, rm <id>, clear, count, stats, help");
+    console.log("Commands: add <text>, list, pending, find <term>, done <id|all>, undo <id>, edit <id> <text>, rm <id>, clear, count, stats, export, help");
     break;
   default:
     console.error(`Unknown command: ${command}`);

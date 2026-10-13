@@ -17,6 +17,7 @@ node todo.js rm 1
 node todo.js clear
 node todo.js count
 node todo.js stats
+node todo.js export > todos.md
 node todo.js help
 ```
 

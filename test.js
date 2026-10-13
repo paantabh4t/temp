@@ -2,7 +2,7 @@ const assert = require("assert");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const { load, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll, sortPendingFirst } = require("./store");
+const { load, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll, sortPendingFirst, toMarkdown } = require("./store");
 
 let todos = add([], "write code");
 todos = add(todos, "push code");
@@ -38,6 +38,8 @@ assert.deepStrictEqual(sortPendingFirst(mixed).map((t) => t.id), [2, 1]);
 assert.deepStrictEqual(mixed.map((t) => t.id), [1, 2]);
 
 assert.ok(!Number.isNaN(Date.parse(add([], "dated")[0].createdAt)));
+
+assert.strictEqual(toMarkdown(mixed), "- [x] a\n- [ ] b");
 
 const bad = path.join(os.tmpdir(), "temp-todo-bad.json");
 fs.writeFileSync(bad, "{not json");
