@@ -19,6 +19,7 @@ node todo.js count
 node todo.js stats
 node todo.js export > todos.md
 node todo.js help
+node todo.js version
 ```
 
 ## Tests

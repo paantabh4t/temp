@@ -94,8 +94,11 @@ switch (command) {
     if (!todos.length) console.log("Nothing to do.");
     for (const t of sortPendingFirst(todos)) console.log(format(t));
     break;
+  case "version":
+    console.log(require("./package.json").version);
+    break;
   case "help":
-    console.log("Commands: add <text>, list, pending, find <term>, done <id|all>, undo <id>, edit <id> <text>, rm <id>, clear, count, stats, export, help");
+    console.log("Commands: add <text>, list, pending, find <term>, done <id|all>, undo <id>, edit <id> <text>, rm <id>, clear, count, stats, export, version, help");
     break;
   default:
     console.error(`Unknown command: ${command}`);
