@@ -81,6 +81,13 @@ switch (command) {
   case "export":
     if (todos.length) console.log(toMarkdown(sortPendingFirst(todos)));
     break;
+  case "show": {
+    const t = todos.find((x) => x.id === requireId(args[0]));
+    console.log(format(t));
+    if (t.createdAt) console.log(`  created:   ${t.createdAt}`);
+    if (t.completedAt) console.log(`  completed: ${t.completedAt}`);
+    break;
+  }
   case "count":
     console.log(String(pending(todos).length));
     break;
@@ -98,7 +105,7 @@ switch (command) {
     console.log(require("./package.json").version);
     break;
   case "help":
-    console.log("Commands: add <text>, list, pending, find <term>, done <id|all>, undo <id>, edit <id> <text>, rm <id>, clear, count, stats, export, version, help");
+    console.log("Commands: add <text>, list, show <id>, pending, find <term>, done <id|all>, undo <id>, edit <id> <text>, rm <id>, clear, count, stats, export, version, help");
     break;
   default:
     console.error(`Unknown command: ${command}`);

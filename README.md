@@ -10,6 +10,7 @@ Run `npm link` once to get a global `todo` command, or call `node todo.js` direc
 node todo.js add "buy milk"
 node todo.js list
 node todo.js pending
+node todo.js show 1
 node todo.js find milk
 node todo.js done 1
 node todo.js done all
