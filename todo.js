@@ -92,8 +92,8 @@ switch (command) {
     console.log(String(pending(todos).length));
     break;
   case "stats": {
-    const { total, done, pending } = summary(todos);
-    console.log(`${total} total, ${done} done, ${pending} pending`);
+    const { total, done, pending, percent } = summary(todos);
+    console.log(`${total} total, ${done} done, ${pending} pending (${percent}% complete)`);
     break;
   }
   case "list":

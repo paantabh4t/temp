@@ -19,7 +19,7 @@ assert.strictEqual(add(todos, "next")[1].id, 3);
 const mixed = complete(add(add([], "a"), "b"), 1);
 assert.deepStrictEqual(clearDone(mixed).map((t) => t.text), ["b"]);
 
-assert.deepStrictEqual(summary(mixed), { total: 2, done: 1, pending: 1 });
+assert.deepStrictEqual(summary(mixed), { total: 2, done: 1, pending: 1, percent: 50 });
 
 assert.strictEqual(reopen(mixed, 1)[0].done, false);
 
@@ -43,6 +43,8 @@ assert.strictEqual(toMarkdown(mixed), "- [x] a\n- [ ] b");
 
 assert.ok(complete(add([], "x"), 1)[0].completedAt);
 assert.strictEqual(reopen(complete(add([], "x"), 1), 1)[0].completedAt, undefined);
+
+assert.strictEqual(summary([]).percent, 0);
 
 const bad = path.join(os.tmpdir(), "temp-todo-bad.json");
 fs.writeFileSync(bad, "{not json");

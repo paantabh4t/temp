@@ -66,7 +66,8 @@ function clearDone(todos) {
 
 function summary(todos) {
   const done = todos.filter((t) => t.done).length;
-  return { total: todos.length, done, pending: todos.length - done };
+  const percent = todos.length ? Math.round((done / todos.length) * 100) : 0;
+  return { total: todos.length, done, pending: todos.length - done, percent };
 }
 
 module.exports = { load, save, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll, sortPendingFirst, toMarkdown };
