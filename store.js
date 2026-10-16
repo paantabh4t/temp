@@ -23,11 +23,11 @@ function add(todos, text) {
 }
 
 function complete(todos, id) {
-  return todos.map((t) => (t.id === id ? { ...t, done: true } : t));
+  return todos.map((t) => (t.id === id ? { ...t, done: true, completedAt: new Date().toISOString() } : t));
 }
 
 function reopen(todos, id) {
-  return todos.map((t) => (t.id === id ? { ...t, done: false } : t));
+  return todos.map((t) => (t.id === id ? { ...t, done: false, completedAt: undefined } : t));
 }
 
 function rename(todos, id, text) {
@@ -44,7 +44,8 @@ function pending(todos) {
 }
 
 function completeAll(todos) {
-  return todos.map((t) => ({ ...t, done: true }));
+  const now = new Date().toISOString();
+  return todos.map((t) => (t.done ? t : { ...t, done: true, completedAt: now }));
 }
 
 function sortPendingFirst(todos) {

@@ -41,6 +41,9 @@ assert.ok(!Number.isNaN(Date.parse(add([], "dated")[0].createdAt)));
 
 assert.strictEqual(toMarkdown(mixed), "- [x] a\n- [ ] b");
 
+assert.ok(complete(add([], "x"), 1)[0].completedAt);
+assert.strictEqual(reopen(complete(add([], "x"), 1), 1)[0].completedAt, undefined);
+
 const bad = path.join(os.tmpdir(), "temp-todo-bad.json");
 fs.writeFileSync(bad, "{not json");
 assert.throws(() => load(bad), /Could not read/);
