@@ -22,6 +22,10 @@ node todo.js help
 node todo.js version
 ```
 
+## License
+
+MIT, see [LICENSE](LICENSE).
+
 ## Tests
 
 ```bash
