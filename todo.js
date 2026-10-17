@@ -58,10 +58,16 @@ switch (command) {
     save(rename(todos, requireId(args[0]), args.slice(1).join(" ")));
     console.log("Updated.");
     break;
-  case "rm":
-    save(remove(todos, requireId(args[0])));
-    console.log("Removed.");
+  case "rm": {
+    if (!args.length) {
+      console.error("Usage: node todo.js rm <id> [id...]");
+      process.exit(1);
+    }
+    const ids = args.map(requireId);
+    save(ids.reduce(remove, todos));
+    console.log(`Removed ${ids.length}.`);
     break;
+  }
   case "clear":
     save(clearDone(todos));
     console.log("Cleared completed todos.");
@@ -105,7 +111,7 @@ switch (command) {
     console.log(require("./package.json").version);
     break;
   case "help":
-    console.log("Commands: add <text>, list, show <id>, pending, find <term>, done <id|all>, undo <id>, edit <id> <text>, rm <id>, clear, count, stats, export, version, help");
+    console.log("Commands: add <text>, list, show <id>, pending, find <term>, done <id|all>, undo <id>, edit <id> <text>, rm <id...>, clear, count, stats, export, version, help");
     break;
   default:
     console.error(`Unknown command: ${command}`);
