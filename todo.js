@@ -10,6 +10,14 @@ try {
   process.exit(1);
 }
 
+function requireIds(values, usage) {
+  if (!values.length) {
+    console.error(`Usage: node todo.js ${usage}`);
+    process.exit(1);
+  }
+  return [...new Set(values.map(requireId))];
+}
+
 function format(t) {
   return `${t.id}. [${t.done ? "x" : " "}] ${t.text}`;
 }
@@ -59,11 +67,7 @@ switch (command) {
     console.log("Updated.");
     break;
   case "rm": {
-    if (!args.length) {
-      console.error("Usage: node todo.js rm <id> [id...]");
-      process.exit(1);
-    }
-    const ids = args.map(requireId);
+    const ids = requireIds(args, "rm <id> [id...]");
     save(ids.reduce(remove, todos));
     console.log(`Removed ${ids.length}.`);
     break;
