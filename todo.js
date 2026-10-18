@@ -56,10 +56,12 @@ switch (command) {
     console.log(`Marked ${ids.length} done.`);
     break;
   }
-  case "undo":
-    save(reopen(todos, requireId(args[0])));
-    console.log("Marked not done.");
+  case "undo": {
+    const ids = requireIds(args, "undo <id> [id...]");
+    save(ids.reduce(reopen, todos));
+    console.log(`Marked ${ids.length} not done.`);
     break;
+  }
   case "edit":
     if (args.length < 2) {
       console.error("Usage: node todo.js edit <id> <text>");
@@ -117,7 +119,7 @@ switch (command) {
     console.log(require("./package.json").version);
     break;
   case "help":
-    console.log("Commands: add <text>, list, show <id>, pending, find <term>, done <id...|all>, undo <id>, edit <id> <text>, rm <id...>, clear, count, stats, export, version, help");
+    console.log("Commands: add <text>, list, show <id>, pending, find <term>, done <id...|all>, undo <id...>, edit <id> <text>, rm <id...>, clear, count, stats, export, version, help");
     break;
   default:
     console.error(`Unknown command: ${command}`);
