@@ -45,15 +45,17 @@ switch (command) {
     }
     console.log("Added.");
     break;
-  case "done":
+  case "done": {
     if (args[0] === "all") {
       save(completeAll(todos));
       console.log("Marked all done.");
       break;
     }
-    save(complete(todos, requireId(args[0])));
-    console.log("Marked done.");
+    const ids = requireIds(args, "done <id> [id...] | done all");
+    save(ids.reduce(complete, todos));
+    console.log(`Marked ${ids.length} done.`);
     break;
+  }
   case "undo":
     save(reopen(todos, requireId(args[0])));
     console.log("Marked not done.");
@@ -115,7 +117,7 @@ switch (command) {
     console.log(require("./package.json").version);
     break;
   case "help":
-    console.log("Commands: add <text>, list, show <id>, pending, find <term>, done <id|all>, undo <id>, edit <id> <text>, rm <id...>, clear, count, stats, export, version, help");
+    console.log("Commands: add <text>, list, show <id>, pending, find <term>, done <id...|all>, undo <id>, edit <id> <text>, rm <id...>, clear, count, stats, export, version, help");
     break;
   default:
     console.error(`Unknown command: ${command}`);

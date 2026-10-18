@@ -13,6 +13,7 @@ node todo.js pending
 node todo.js show 1
 node todo.js find milk
 node todo.js done 1
+node todo.js done 2 3
 node todo.js done all
 node todo.js undo 1
 node todo.js edit 1 "buy oat milk"
