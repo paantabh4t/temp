@@ -48,6 +48,10 @@ function completeAll(todos) {
   return todos.map((t) => (t.done ? t : { ...t, done: true, completedAt: now }));
 }
 
+function reopenAll(todos) {
+  return todos.map((t) => ({ ...t, done: false, completedAt: undefined }));
+}
+
 function sortPendingFirst(todos) {
   return [...todos].sort((a, b) => a.done - b.done || a.id - b.id);
 }
@@ -70,4 +74,4 @@ function summary(todos) {
   return { total: todos.length, done, pending: todos.length - done, percent };
 }
 
-module.exports = { load, save, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll, sortPendingFirst, toMarkdown };
+module.exports = { load, save, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll, reopenAll, sortPendingFirst, toMarkdown };

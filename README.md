@@ -17,6 +17,7 @@ node todo.js done 2 3
 node todo.js done all
 node todo.js undo 1
 node todo.js undo 2 3
+node todo.js undo all
 node todo.js edit 1 "buy oat milk"
 node todo.js rm 1
 node todo.js rm 2 3

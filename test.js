@@ -2,7 +2,7 @@ const assert = require("assert");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const { load, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll, sortPendingFirst, toMarkdown } = require("./store");
+const { load, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll, reopenAll, sortPendingFirst, toMarkdown } = require("./store");
 
 let todos = add([], "write code");
 todos = add(todos, "push code");
@@ -45,6 +45,8 @@ assert.ok(complete(add([], "x"), 1)[0].completedAt);
 assert.strictEqual(reopen(complete(add([], "x"), 1), 1)[0].completedAt, undefined);
 
 assert.strictEqual(summary([]).percent, 0);
+
+assert.ok(reopenAll(completeAll(mixed)).every((t) => !t.done));
 
 const bad = path.join(os.tmpdir(), "temp-todo-bad.json");
 fs.writeFileSync(bad, "{not json");

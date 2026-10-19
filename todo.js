@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const { load, save, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll, sortPendingFirst, toMarkdown } = require("./store");
+const { load, save, add, complete, remove, clearDone, summary, reopen, rename, search, pending, completeAll, reopenAll, sortPendingFirst, toMarkdown } = require("./store");
 
 const [command, ...args] = process.argv.slice(2);
 let todos;
@@ -57,7 +57,12 @@ switch (command) {
     break;
   }
   case "undo": {
-    const ids = requireIds(args, "undo <id> [id...]");
+    if (args[0] === "all") {
+      save(reopenAll(todos));
+      console.log("Marked all not done.");
+      break;
+    }
+    const ids = requireIds(args, "undo <id> [id...] | undo all");
     save(ids.reduce(reopen, todos));
     console.log(`Marked ${ids.length} not done.`);
     break;
@@ -121,7 +126,7 @@ switch (command) {
     console.log(require("./package.json").version);
     break;
   case "help":
-    console.log("Commands: add <text>, list, show <id>, pending, find <term>, done <id...|all>, undo <id...>, edit <id> <text>, rm <id...>, clear, count, stats, export, version, help");
+    console.log("Commands: add <text>, list, show <id>, pending, find <term>, done <id...|all>, undo <id...|all>, edit <id> <text>, rm <id...>, clear, count, stats, export, version, help");
     break;
   default:
     console.error(`Unknown command: ${command}`);
