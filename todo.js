@@ -76,10 +76,12 @@ switch (command) {
     console.log(`Removed ${ids.length}.`);
     break;
   }
-  case "clear":
-    save(clearDone(todos));
-    console.log("Cleared completed todos.");
+  case "clear": {
+    const kept = clearDone(todos);
+    save(kept);
+    console.log(`Cleared ${todos.length - kept.length} completed todos.`);
     break;
+  }
   case "pending": {
     const open = pending(todos);
     if (!open.length) console.log("Nothing pending.");
