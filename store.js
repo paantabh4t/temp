@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const FILE = path.join(__dirname, "todos.json");
+const FILE = process.env.TODO_FILE || path.join(__dirname, "todos.json");
 
 function load(file = FILE) {
   if (!fs.existsSync(file)) return [];

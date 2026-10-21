@@ -29,6 +29,14 @@ node todo.js help
 node todo.js version
 ```
 
+## Data file
+
+Todos are stored in `todos.json` next to `todo.js`. Set `TODO_FILE` to use a different file:
+
+```bash
+TODO_FILE=~/work-todos.json node todo.js list
+```
+
 ## License
 
 MIT, see [LICENSE](LICENSE).
