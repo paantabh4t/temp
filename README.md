@@ -1,5 +1,7 @@
 # temp
 
+[![test](https://github.com/paantabh4t/temp/actions/workflows/test.yml/badge.svg)](https://github.com/paantabh4t/temp/actions/workflows/test.yml)
+
 A tiny command-line todo list, written in plain Node.js (no dependencies).
 
 ## Usage
