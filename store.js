@@ -13,7 +13,9 @@ function load(file = FILE) {
 }
 
 function save(todos, file = FILE) {
-  fs.writeFileSync(file, JSON.stringify(todos, null, 2));
+  const tmp = `${file}.tmp`;
+  fs.writeFileSync(tmp, JSON.stringify(todos, null, 2) + "\n");
+  fs.renameSync(tmp, file);
 }
 
 function add(todos, text) {
