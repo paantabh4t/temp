@@ -72,7 +72,12 @@ switch (command) {
       console.error("Usage: node todo.js edit <id> <text>");
       process.exit(1);
     }
-    save(rename(todos, requireId(args[0]), args.slice(1).join(" ")));
+    try {
+      save(rename(todos, requireId(args[0]), args.slice(1).join(" ")));
+    } catch (err) {
+      console.error(err.message);
+      process.exit(1);
+    }
     console.log("Updated.");
     break;
   case "rm": {

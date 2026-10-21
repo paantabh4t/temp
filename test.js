@@ -48,6 +48,9 @@ assert.strictEqual(summary([]).percent, 0);
 
 assert.ok(reopenAll(completeAll(mixed)).every((t) => !t.done));
 
+assert.throws(() => rename(mixed, 1, "  "), /cannot be empty/);
+assert.strictEqual(rename(mixed, 1, " z ")[0].text, "z");
+
 const bad = path.join(os.tmpdir(), "temp-todo-bad.json");
 fs.writeFileSync(bad, "{not json");
 assert.throws(() => load(bad), /Could not read/);

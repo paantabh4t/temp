@@ -31,7 +31,8 @@ function reopen(todos, id) {
 }
 
 function rename(todos, id, text) {
-  return todos.map((t) => (t.id === id ? { ...t, text } : t));
+  if (!text.trim()) throw new Error("Todo text cannot be empty.");
+  return todos.map((t) => (t.id === id ? { ...t, text: text.trim() } : t));
 }
 
 function search(todos, term) {
