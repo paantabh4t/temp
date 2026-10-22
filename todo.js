@@ -99,6 +99,10 @@ switch (command) {
     break;
   }
   case "find": {
+    if (!args.length) {
+      console.error("Usage: node todo.js find <term>");
+      process.exit(1);
+    }
     const matches = search(todos, args.join(" "));
     if (!matches.length) console.log("No matches.");
     for (const t of matches) console.log(format(t));
