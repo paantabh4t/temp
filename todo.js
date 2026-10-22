@@ -112,7 +112,12 @@ switch (command) {
     if (todos.length) console.log(toMarkdown(sortPendingFirst(todos)));
     break;
   case "show": {
-    const t = todos.find((x) => x.id === requireId(args[0]));
+    if (!args.length) {
+      console.error("Usage: node todo.js show <id>");
+      process.exit(1);
+    }
+    const id = requireId(args[0]);
+    const t = todos.find((x) => x.id === id);
     console.log(format(t));
     if (t.createdAt) console.log(`  created:   ${t.createdAt}`);
     if (t.completedAt) console.log(`  completed: ${t.completedAt}`);
