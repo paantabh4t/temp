@@ -137,9 +137,13 @@ switch (command) {
     for (const t of sortPendingFirst(todos)) console.log(format(t));
     break;
   case "version":
+  case "--version":
+  case "-v":
     console.log(require("./package.json").version);
     break;
   case "help":
+  case "--help":
+  case "-h":
     console.log("Commands: add <text>, list, show <id>, pending, find <term>, done <id...|all>, undo <id...|all>, edit <id> <text>, rm <id...>, clear, count, stats, export, version, help");
     break;
   default:
