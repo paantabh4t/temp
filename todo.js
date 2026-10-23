@@ -143,6 +143,6 @@ switch (command) {
     console.log("Commands: add <text>, list, show <id>, pending, find <term>, done <id...|all>, undo <id...|all>, edit <id> <text>, rm <id...>, clear, count, stats, export, version, help");
     break;
   default:
-    console.error(`Unknown command: ${command}`);
+    console.error(`Unknown command: ${command}. Run "node todo.js help" to see all commands.`);
     process.exit(1);
 }
