@@ -144,7 +144,26 @@ switch (command) {
   case "help":
   case "--help":
   case "-h":
-    console.log("Commands: add <text>, list, show <id>, pending, find <term>, done <id...|all>, undo <id...|all>, edit <id> <text>, rm <id...>, clear, count, stats, export, version, help");
+    const commands = [
+      ["add <text>", "Add a todo"],
+      ["list", "List all todos, open ones first"],
+      ["show <id>", "Show one todo with its timestamps"],
+      ["pending", "List only open todos"],
+      ["find <term>", "Search todo text"],
+      ["done <id...|all>", "Mark todos done"],
+      ["undo <id...|all>", "Mark todos not done"],
+      ["edit <id> <text>", "Change a todo's text"],
+      ["rm <id...>", "Remove todos"],
+      ["clear", "Remove all completed todos"],
+      ["count", "Print the number of open todos"],
+      ["stats", "Show totals and percent complete"],
+      ["export", "Print todos as a Markdown checklist"],
+      ["version", "Print the version"],
+      ["help", "Show this help"],
+    ];
+    console.log("Usage: node todo.js <command>");
+    console.log("");
+    for (const [cmd, desc] of commands) console.log(`  ${cmd.padEnd(18)}${desc}`);
     break;
   default:
     console.error(`Unknown command: ${command}. Run "node todo.js help" to see all commands.`);
