@@ -62,4 +62,21 @@ fs.writeFileSync(bad, "{not json");
 assert.throws(() => load(bad), /Could not read/);
 fs.unlinkSync(bad);
 
+const { spawnSync } = require("child_process");
+const cliFile = path.join(os.tmpdir(), "temp-todo-cli.json");
+const cli = (...args) =>
+  spawnSync(process.execPath, [path.join(__dirname, "todo.js"), ...args], {
+    env: { ...process.env, TODO_FILE: cliFile },
+    encoding: "utf8",
+  });
+if (fs.existsSync(cliFile)) fs.unlinkSync(cliFile);
+cli("add", "buy", "milk");
+cli("add", "walk dog");
+cli("done", "1");
+assert.strictEqual(cli("count").stdout.trim(), "1");
+assert.ok(cli("list").stdout.includes("2. [ ] walk dog"));
+assert.strictEqual(cli("done", "9").status, 1);
+assert.strictEqual(cli("bogus").status, 1);
+fs.unlinkSync(cliFile);
+
 console.log("All tests passed.");
