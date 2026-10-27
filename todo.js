@@ -119,8 +119,8 @@ switch (command) {
     const id = requireId(args[0]);
     const t = todos.find((x) => x.id === id);
     console.log(format(t));
-    if (t.createdAt) console.log(`  created:   ${t.createdAt}`);
-    if (t.completedAt) console.log(`  completed: ${t.completedAt}`);
+    if (t.createdAt) console.log(`  created:   ${new Date(t.createdAt).toLocaleString()}`);
+    if (t.completedAt) console.log(`  completed: ${new Date(t.completedAt).toLocaleString()}`);
     break;
   }
   case "count":
