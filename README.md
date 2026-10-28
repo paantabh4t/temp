@@ -27,6 +27,7 @@ node todo.js clear
 node todo.js count
 node todo.js stats
 node todo.js export > todos.md
+node todo.js export pending
 node todo.js help
 node todo.js version
 ```

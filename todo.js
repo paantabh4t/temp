@@ -108,9 +108,11 @@ switch (command) {
     for (const t of matches) console.log(format(t));
     break;
   }
-  case "export":
-    if (todos.length) console.log(toMarkdown(sortPendingFirst(todos)));
+  case "export": {
+    const items = args[0] === "pending" ? pending(todos) : sortPendingFirst(todos);
+    if (items.length) console.log(toMarkdown(items));
     break;
+  }
   case "show": {
     if (!args.length) {
       console.error("Usage: node todo.js show <id>");
@@ -161,7 +163,7 @@ switch (command) {
       ["clear", "Remove all completed todos"],
       ["count", "Print the number of open todos"],
       ["stats", "Show totals and percent complete"],
-      ["export", "Print todos as a Markdown checklist"],
+      ["export [pending]", "Print todos as a Markdown checklist"],
       ["version", "Print the version"],
       ["help", "Show this help"],
     ];

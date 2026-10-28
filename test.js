@@ -76,6 +76,7 @@ cli("done", "1");
 assert.strictEqual(cli("count").stdout.trim(), "1");
 assert.ok(cli("list").stdout.includes("2. [ ] walk dog"));
 assert.ok(cli("list").stdout.includes("1 open, 1 done"));
+assert.strictEqual(cli("export", "pending").stdout.trim(), "- [ ] walk dog");
 assert.strictEqual(cli("done", "9").status, 1);
 assert.strictEqual(cli("bogus").status, 1);
 fs.unlinkSync(cliFile);
