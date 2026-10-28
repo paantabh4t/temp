@@ -135,6 +135,10 @@ switch (command) {
   case undefined:
     if (!todos.length) console.log("Nothing to do.");
     for (const t of sortPendingFirst(todos)) console.log(format(t));
+    if (todos.length) {
+      const s = summary(todos);
+      console.log(`${s.pending} open, ${s.done} done`);
+    }
     break;
   case "version":
   case "--version":
