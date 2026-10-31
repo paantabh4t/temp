@@ -48,7 +48,7 @@ assert.strictEqual(summary([]).percent, 0);
 
 assert.ok(reopenAll(completeAll(mixed)).every((t) => !t.done));
 
-
+assert.throws(() => rename(mixed, 1, "  "), /cannot be empty/);
 assert.strictEqual(rename(mixed, 1, " z ")[0].text, "z");
 
 const saved = path.join(os.tmpdir(), "temp-todo-save.json");
